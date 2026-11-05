@@ -1,4 +1,4 @@
-package frc.robot;
+package frc.robot.extra;
 public class MotorPowerController {
 
     private double Kp, Ki, integral, dTime, error, timeIncrement, lastSensorRead, changeSpeed, predictionPoint, speedNeeded, allowedError,

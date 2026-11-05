@@ -8,13 +8,17 @@ import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 import com.revrobotics.spark.config.SparkMaxConfig;
 
+import edu.wpi.first.math.VecBuilder;
+import edu.wpi.first.math.Vector;
 import edu.wpi.first.math.estimator.DifferentialDrivePoseEstimator;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
+import edu.wpi.first.math.numbers.N3;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.DrivetrainConstants;
+import frc.robot.extra.LimelightHelpers;
 
 public class TankDriveSubsystem extends SubsystemBase {
     private SparkMax leftMotor = new SparkMax(DrivetrainConstants.kLeftDriveMotorID, MotorType.kBrushless);
@@ -65,6 +69,15 @@ public class TankDriveSubsystem extends SubsystemBase {
         double rightVelocity = -rightMotor.getEncoder().getVelocity();
 
         return Units.inchesToMeters((leftVelocity + rightVelocity) / 2 / DrivetrainConstants.kGearReduction * (wheelDiameter * Math.PI)) / 60;
+    }
+
+    public Pigeon2 getPigeon2() {
+        return pigeon;
+    }
+
+    public void addVisionMeasurement(Pose2d limelightPose, double timestamp, Vector<N3> stdDevs) {
+        poseEstimator.setVisionMeasurementStdDevs(stdDevs);
+        poseEstimator.addVisionMeasurement(limelightPose, timestamp);
     }
 
     @Override

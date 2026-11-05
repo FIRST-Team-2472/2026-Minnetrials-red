@@ -6,6 +6,7 @@ package frc.robot;
 
 import frc.robot.Constants.ControllerConstants;
 import frc.robot.commands.TankDriveCommand;
+import frc.robot.extra.Limelight;
 import frc.robot.subsystems.TankDriveSubsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -17,11 +18,17 @@ public class RobotContainer {
   private final CommandXboxController xboxController = new CommandXboxController(ControllerConstants.kDriverControllerPort);
   private final CommandJoystick leftJoystick = new CommandJoystick(0);
   private final CommandJoystick rightJoystick = new CommandJoystick(0);
+
+
   TankDriveSubsystem tankDriveSubsystem = new TankDriveSubsystem();
   SendableChooser<Command> autoChooser;
 
+  private Limelight limelight = new Limelight("limelight", tankDriveSubsystem, true, true, () -> rightJoystick.button(14).getAsBoolean());
+
   public RobotContainer() {
     configureBindings();
+    limelight.enable();
+    limelight.trustLL(true);
   }
 
   private void configureBindings() {
