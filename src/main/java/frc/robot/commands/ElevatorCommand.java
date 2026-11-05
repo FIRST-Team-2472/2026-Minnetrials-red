@@ -7,22 +7,23 @@ import frc.robot.subsystems.ElevatorSubsystem;
 
 public class ElevatorCommand extends Command {
     ElevatorSubsystem elevatorSubsystem;
-    Supplier<Double> joystick;   
-        public ElevatorCommand(ElevatorSubsystem elevatorSubsystem, Supplier<Double> joystick) {
-            this.elevatorSubsystem = elevatorSubsystem;
-            this.joystick = joystick;
-            addRequirements(elevatorSubsystem);
+    Supplier<Double> joystick;
+
+    public ElevatorCommand(ElevatorSubsystem elevatorSubsystem, Supplier<Double> joystick) {
+        this.elevatorSubsystem = elevatorSubsystem;
+        this.joystick = joystick;
+        addRequirements(elevatorSubsystem);
     }
 
     @Override
-    public void initialize() {}
+    public void initialize() {
+    }
 
     @Override
     public void execute() {
         double power = joystick.get();
 
         elevatorSubsystem.spin(power);
-
     }
 
     @Override

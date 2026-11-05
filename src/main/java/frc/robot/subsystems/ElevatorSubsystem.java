@@ -12,15 +12,15 @@ import frc.robot.Constants.ElevatorConstants;
 
 public class ElevatorSubsystem extends SubsystemBase {
     private SparkMax elevatorMotor = new SparkMax(ElevatorConstants.kMotorID, MotorType.kBrushless);
+
     public ElevatorSubsystem() {
         SparkMaxConfig config = new SparkMaxConfig();
         config.smartCurrentLimit(35);
         config.idleMode(IdleMode.kBrake);
-        elevatorMotor.configure(config,ResetMode.kResetSafeParameters,PersistMode.kPersistParameters);
+        elevatorMotor.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
     }
 
     public void spin(double power) {
         elevatorMotor.set(power);
     }
 }
-
