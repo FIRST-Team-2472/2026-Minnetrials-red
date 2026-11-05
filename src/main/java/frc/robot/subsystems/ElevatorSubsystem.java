@@ -23,4 +23,8 @@ public class ElevatorSubsystem extends SubsystemBase {
     public void spin(double power) {
         elevatorMotor.set(power);
     }
+
+    public double getInchesTraveled() {
+        return elevatorMotor.getEncoder().getPosition() * ElevatorConstants.kWinchDiameter * Math.PI;
+    }
 }
