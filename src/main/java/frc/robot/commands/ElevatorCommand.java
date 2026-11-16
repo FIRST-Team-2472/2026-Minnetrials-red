@@ -4,12 +4,15 @@ import java.util.function.Supplier;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.MotorPowerController;
+import frc.robot.Constants.ControllerConstants;
+import frc.robot.Constants.ElevatorConstants;
 import frc.robot.subsystems.ElevatorSubsystem;
 
 public class ElevatorCommand extends Command {
     ElevatorSubsystem elevatorSubsystem;
     Supplier<Double> joystick;
     MotorPowerController motorPowerController;
+    double targetHeight;
 
     public ElevatorCommand(ElevatorSubsystem elevatorSubsystem, Supplier<Double> joystick) {
         this.elevatorSubsystem = elevatorSubsystem;
@@ -20,14 +23,19 @@ public class ElevatorCommand extends Command {
 
     @Override
     public void initialize() {
+        targetHeight = 0;
     }
 
     @Override
     public void execute() {
-        double targetHeight = elevatorSubsystem.getInchesTraveled() + joystick.get();
+        targetHeight = elevatorSubsystem.getInchesTraveled();
         double power;
 
-        targetHeight = Math.min(targetHeight, 0); //0 is max height
+        if (Math.abs(joystick.get()) >= ControllerConstants.kDeadband) {
+            targetHeight += joystick.get(); // Adjust the scaling factor as needed
+        }
+
+        targetHeight = Math.min(targetHeight, ElevatorConstants.kMaxHeight); //0 is max height
         targetHeight = Math.max(targetHeight, 0); //0 is min height
 
         power = motorPowerController.calculate(targetHeight, elevatorSubsystem.getInchesTraveled());
