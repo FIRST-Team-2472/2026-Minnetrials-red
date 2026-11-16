@@ -48,6 +48,7 @@ public class TankDriveCommand extends Command {
             drivePower = speedPowerController.calculate(drivePower * kMaxSpeed, -tankDriveSubsystem.getSpeedMeters());
         }
 
+        drivePower = speedAccelLimiter.calculate(drivePower);
         tankDriveSubsystem.drive(drivePower, turnPower);
     }
 

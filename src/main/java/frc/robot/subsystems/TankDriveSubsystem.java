@@ -22,7 +22,7 @@ public class TankDriveSubsystem extends SubsystemBase {
     private Pigeon2 pigeon = new Pigeon2(0);
     private final double wheelDiameter = DrivetrainConstants.kWheelDiameter;
 
-    DifferentialDriveKinematics kinematics = new DifferentialDriveKinematics(0);
+    DifferentialDriveKinematics kinematics = new DifferentialDriveKinematics(DrivetrainConstants.kTrackWidth);
     DifferentialDrivePoseEstimator poseEstimator;
 
     public TankDriveSubsystem() {
