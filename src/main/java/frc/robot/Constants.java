@@ -15,8 +15,9 @@ public final class Constants {
   public static class DrivetrainConstants {
     public static final int kLeftDriveMotorID = 0;
     public static final int kRightDriveMotorID = 0;
-    public static final double kWheelDiameter = Units.inchesToMeters(0);
-    public static final int kGearReduction = 1;
+    public static final double kWheelDiameter = Units.inchesToMeters(6);
+    public static final double kTrackWidth = Units.inchesToMeters(22.5);
+    public static final int kGearReduction = 12;
     public static final double kMaxSpeed = 3.2;
   }
 }

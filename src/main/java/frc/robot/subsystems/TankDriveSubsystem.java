@@ -32,7 +32,7 @@ public class TankDriveSubsystem extends SubsystemBase {
     private final MotorPowerController autoSpeedController = new MotorPowerController(0, 0, 0, 0, 0, 0, 0);
     private final MotorPowerController autoYawController = new MotorPowerController(0, 0, 0, 0, 0, 0, 0);
 
-    DifferentialDriveKinematics kinematics = new DifferentialDriveKinematics(0);
+    DifferentialDriveKinematics kinematics = new DifferentialDriveKinematics(DrivetrainConstants.kTrackWidth);
     DifferentialDrivePoseEstimator poseEstimator;
 
     public TankDriveSubsystem() {
