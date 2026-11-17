@@ -2,6 +2,7 @@ package frc.robot.commands;
 
 import java.util.function.Supplier;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 import frc.robot.Constants.ControllerConstants;
@@ -14,13 +15,16 @@ public class TankDriveCommand extends Command {
     Supplier<Double> leftJoystick, rightJoystick;
     MotorPowerController speedPowerController;
     AccelLimiter speedAccelLimiter;
+    Supplier<Boolean> yButton;
+    Timer timer = new Timer();
     final double kMaxSpeed = Constants.DrivetrainConstants.kMaxSpeed;
-
-    public TankDriveCommand(TankDriveSubsystem tankDriveSubsystem, Supplier<Double> leftJoystick, Supplier<Double> rightJoystick) {
+    public TankDriveCommand(TankDriveSubsystem tankDriveSubsystem, Supplier<Double> leftJoystick, Supplier<Double> rightJoystick, Supplier<Boolean> buttonY) {
         this.tankDriveSubsystem = tankDriveSubsystem;
         this.leftJoystick = leftJoystick;
         this.rightJoystick = rightJoystick;
+        this.yButton = yButton;
         addRequirements(tankDriveSubsystem);
+        
 
         speedAccelLimiter = new AccelLimiter(0.02, 0.1);
         speedPowerController = new MotorPowerController(0, 0, 0, 0, 0, 0, 0);
@@ -33,6 +37,21 @@ public class TankDriveCommand extends Command {
     public void execute() {
         double drivePower = leftJoystick.get();
         double turnPower = rightJoystick.get();
+        double tx = tankDriveSubsystem.getTagTX();
+        double ta  = tankDriveSubsystem.getTagTA();
+        double direction = tx / Math.abs(tx);
+       
+        if (yButton.get() && ta > 0) {
+            while (tx > 1) {
+                    tankDriveSubsystem.drive(0, direction);
+                }
+                
+            
+            
+               
+            
+            
+        } else {
 
         if (Math.abs(drivePower) < ControllerConstants.kDeadband) {
             turnPower = 0;
@@ -49,6 +68,7 @@ public class TankDriveCommand extends Command {
         }
 
         tankDriveSubsystem.drive(drivePower, turnPower);
+        }
     }
 
     @Override

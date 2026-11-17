@@ -32,7 +32,7 @@ public class RobotContainer {
   }
 
   private void configureBindings() {
-    tankDriveSubsystem.setDefaultCommand(new TankDriveCommand(tankDriveSubsystem, () -> leftJoystick.getY(), () -> rightJoystick.getX()));
+    tankDriveSubsystem.setDefaultCommand(new TankDriveCommand(tankDriveSubsystem, () -> leftJoystick.getY(), () -> rightJoystick.getX(), () -> xboxController.y().getAsBoolean()));
   }
 
   public Command getAutonomousCommand() {

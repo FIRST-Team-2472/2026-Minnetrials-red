@@ -19,6 +19,7 @@ import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.DrivetrainConstants;
 import frc.robot.extra.LimelightHelpers;
+import frc.robot.extra.LimelightHelpers.RawFiducial;
 
 public class TankDriveSubsystem extends SubsystemBase {
     private SparkMax leftMotor = new SparkMax(DrivetrainConstants.kLeftDriveMotorID, MotorType.kBrushless);
@@ -80,6 +81,27 @@ public class TankDriveSubsystem extends SubsystemBase {
         poseEstimator.addVisionMeasurement(limelightPose, timestamp);
     }
 
+    public int getTagID() {
+        RawFiducial[] fiducials = LimelightHelpers.getRawFiducials("limelight");
+       if (fiducials.length >= 0) {
+        return fiducials[0].id;
+       }
+       return -1;
+    }
+    public double getTagTX() {
+        RawFiducial[] fiducials = LimelightHelpers.getRawFiducials("limelight");
+       if (fiducials.length >= 0) {
+        return fiducials[0].txnc;
+       }
+       return -1;
+    }
+    public double getTagTA() {
+        RawFiducial[] fiducials = LimelightHelpers.getRawFiducials("limelight");
+       if (fiducials.length >= 0) {
+        return fiducials[0].ta;
+       }
+       return -1;
+    }
     @Override
     public void periodic() {
         poseEstimator.update(
