@@ -16,13 +16,15 @@ public class TankDriveCommand extends Command {
     MotorPowerController speedPowerController;
     AccelLimiter speedAccelLimiter;
     Supplier<Boolean> yButton;
+    Supplier<Boolean> xButton;
     Timer timer = new Timer();
     final double kMaxSpeed = Constants.DrivetrainConstants.kMaxSpeed;
-    public TankDriveCommand(TankDriveSubsystem tankDriveSubsystem, Supplier<Double> leftJoystick, Supplier<Double> rightJoystick, Supplier<Boolean> buttonY) {
+    public TankDriveCommand(TankDriveSubsystem tankDriveSubsystem, Supplier<Double> leftJoystick, Supplier<Double> rightJoystick, Supplier<Boolean> yButton, Supplier<Boolean> xButton) {
         this.tankDriveSubsystem = tankDriveSubsystem;
         this.leftJoystick = leftJoystick;
         this.rightJoystick = rightJoystick;
         this.yButton = yButton;
+        this.xButton = xButton;
         addRequirements(tankDriveSubsystem);
         
 
@@ -39,18 +41,28 @@ public class TankDriveCommand extends Command {
         double turnPower = rightJoystick.get();
         double tx = tankDriveSubsystem.getTagTX();
         double ta  = tankDriveSubsystem.getTagTA();
-        double direction = tx / Math.abs(tx);
+        double direction = tx / Math.abs(tx); // either 1 or -1 always
        
         if (yButton.get() && ta > 0) {
-            while (tx > 1) {
+            while (tx > 1 || tx < -1) {
                     tankDriveSubsystem.drive(0, direction);
-                }
-                
+            }
+            while (ta < 40) {
+                tankDriveSubsystem.drive(1, 0);
+            }
+            while (tx > 1 || tx < -1) {
+                    tankDriveSubsystem.drive(0, direction);
+            }
             
             
                
             
             
+        } else if (xButton.get()){
+            while (tx > 1 || tx < -1) {
+                    tankDriveSubsystem.drive(0, direction);
+            }
+            tankDriveSubsystem.drive(0, 0);
         } else {
 
         if (Math.abs(drivePower) < ControllerConstants.kDeadband) {
