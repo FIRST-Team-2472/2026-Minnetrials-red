@@ -1,6 +1,5 @@
 package frc.robot.commands;
 
-import java.time.chrono.JapaneseEra;
 import java.util.function.Supplier;
 
 import edu.wpi.first.wpilibj2.command.Command;
