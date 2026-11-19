@@ -27,4 +27,8 @@ public class IntakeSubsystem extends SubsystemBase {
     public void runIntakeOut() {
         intakeMotor.set(IntakeConstants.kIntakeOutSpeed);
     }
+
+    public void stopIntake() {
+        intakeMotor.set(IntakeConstants.kIntakeOffSpeed);
+    }
 }
