@@ -1,5 +1,6 @@
 package frc.robot.commands;
 
+import java.time.chrono.JapaneseEra;
 import java.util.function.Supplier;
 
 import edu.wpi.first.wpilibj2.command.Command;
@@ -31,14 +32,14 @@ public class TankDriveCommand extends Command {
 
     @Override
     public void execute() {
-        double drivePower = leftJoystick.get();
-        double turnPower = rightJoystick.get();
+        double drivePower = -leftJoystick.get();
+        double turnPower = -rightJoystick.get();
 
-        if (Math.abs(drivePower) < ControllerConstants.kDeadband) {
+        if (Math.abs(turnPower) < ControllerConstants.kDeadband) {
             turnPower = 0;
         }
 
-        if (Math.abs(turnPower) < ControllerConstants.kDeadband) {
+        if (Math.abs(drivePower) < ControllerConstants.kDeadband) {
             drivePower = 0;
         }
 
