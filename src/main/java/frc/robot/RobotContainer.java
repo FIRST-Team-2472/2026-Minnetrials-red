@@ -15,8 +15,8 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 public class RobotContainer {
 
   private final CommandXboxController xboxController = new CommandXboxController(ControllerConstants.kDriverControllerPort);
-  private final CommandJoystick leftJoystick = new CommandJoystick(0);
-  private final CommandJoystick rightJoystick = new CommandJoystick(0);
+  private final CommandJoystick leftJoystick = new CommandJoystick(ControllerConstants.kLeftJoystickPort);
+  private final CommandJoystick rightJoystick = new CommandJoystick(ControllerConstants.kRightJoystickPort);
   TankDriveSubsystem tankDriveSubsystem = new TankDriveSubsystem();
   SendableChooser<Command> autoChooser;
 

@@ -23,7 +23,7 @@ public class TankDriveCommand extends Command {
         addRequirements(tankDriveSubsystem);
 
         speedAccelLimiter = new AccelLimiter(0.02, 0.1);
-        speedPowerController = new MotorPowerController(0, 0, 0, 0, 0, 0, 0);
+        speedPowerController = new MotorPowerController(0.33, 0.1, 0, 0, 0, 0.67, 1);
     }
 
     @Override
