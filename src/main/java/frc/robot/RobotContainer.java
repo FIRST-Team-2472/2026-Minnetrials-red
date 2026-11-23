@@ -6,14 +6,22 @@ package frc.robot;
 
 import frc.robot.commands.ElevatorCommand;
 import frc.robot.subsystems.ElevatorSubsystem;
+import frc.robot.Constants.ControllerConstants;
+import frc.robot.commands.TankDriveCommand;
+import frc.robot.subsystems.TankDriveSubsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 
 public class RobotContainer {
 
   private final CommandXboxController xboxController = new CommandXboxController(0);
   ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
+  private final CommandXboxController xboxController = new CommandXboxController(ControllerConstants.kDriverControllerPort);
+  private final CommandJoystick leftJoystick = new CommandJoystick(ControllerConstants.kLeftJoystickPort);
+  private final CommandJoystick rightJoystick = new CommandJoystick(ControllerConstants.kRightJoystickPort);
+  TankDriveSubsystem tankDriveSubsystem = new TankDriveSubsystem();
   SendableChooser<Command> autoChooser;
 
   public RobotContainer() {
@@ -22,6 +30,7 @@ public class RobotContainer {
 
   private void configureBindings() {
     elevatorSubsystem.setDefaultCommand(new ElevatorCommand(elevatorSubsystem, () -> xboxController.getLeftY()));
+    tankDriveSubsystem.setDefaultCommand(new TankDriveCommand(tankDriveSubsystem, () -> leftJoystick.getY(), () -> rightJoystick.getX()));
   }
 
   public Command getAutonomousCommand() {
