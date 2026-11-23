@@ -7,14 +7,26 @@ package frc.robot;
 import edu.wpi.first.math.util.Units;
 
 public final class Constants {
-  public static class OperatorConstants {
-    public static final int kDriverControllerPort = 2;
-
+  public static class ControllerConstants {
+    public static final int kDriverControllerPort = 0;
+    public static final int kLeftJoystickPort = 1;
+    public static final int kRightJoystickPort = 2;
+    public static final double kDeadband = 0.05;
   }
+  
   public static class IntakeConstants {
     public static final int kIntakeID = 3;
     public static final double kIntakeInSpeed = 0.2;
     public static final double kIntakeOutSpeed = -0.2;
     public static final double kIntakeOffSpeed = 0;
+  }
+
+  public static class DrivetrainConstants {
+    public static final int kLeftDriveMotorID = 0;
+    public static final int kRightDriveMotorID = 1;
+    public static final double kWheelDiameter = Units.inchesToMeters(6);
+    public static final double kTrackWidth = Units.inchesToMeters(22.5);
+    public static final int kGearReduction = 12;
+    public static final double kMaxSpeed = 3.2;
   }
 }
