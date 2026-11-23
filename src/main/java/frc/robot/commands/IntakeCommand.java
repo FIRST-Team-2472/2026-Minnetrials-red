@@ -48,6 +48,7 @@ public class IntakeCommand extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    intakeSubsystem.stopIntake();
   }
 
   // Returns true when the command should end.
