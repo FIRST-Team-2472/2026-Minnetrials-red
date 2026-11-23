@@ -13,13 +13,6 @@ public final class Constants {
     public static final int kRightJoystickPort = 2;
     public static final double kDeadband = 0.05;
   }
-  
-  public static class IntakeConstants {
-    public static final int kIntakeID = 0;
-    public static final int kIntakeInSpeed = 10;
-    public static final int kIntakeOutSpeed = -10;
-    public static final int kIntakeOffSpeed = 0;
-  }
 
   public static class DrivetrainConstants {
     public static final int kLeftDriveMotorID = 0;
