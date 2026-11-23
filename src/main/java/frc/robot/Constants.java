@@ -12,9 +12,9 @@ public final class Constants {
 
   }
   public static class IntakeConstants {
-    public static final int kIntakeID = 0;
-    public static final int kIntakeInSpeed = 10;
-    public static final int kIntakeOutSpeed = -10;
-    public static final int kIntakeOffSpeed = 0;
+    public static final int kIntakeID = 3;
+    public static final double kIntakeInSpeed = 0.2;
+    public static final double kIntakeOutSpeed = -0.2;
+    public static final double kIntakeOffSpeed = 0;
   }
 }

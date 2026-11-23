@@ -16,15 +16,14 @@ public class RobotContainer {
   private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();  
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
-  private final CommandXboxController controller =
-      new CommandXboxController(OperatorConstants.kDriverControllerPort);
+  private final CommandXboxController xboxController = new CommandXboxController(OperatorConstants.kDriverControllerPort);
 
   public RobotContainer() {
     configureBindings();
   }
 
   private void configureBindings() {
-    intakeSubsystem.setDefaultCommand(new IntakeCommand(intakeSubsystem, () -> controller.leftTrigger().getAsBoolean() , () -> controller.rightTrigger().getAsBoolean()));
+    intakeSubsystem.setDefaultCommand(new IntakeCommand(intakeSubsystem, () -> xboxController.leftTrigger().getAsBoolean() , () -> xboxController.rightTrigger().getAsBoolean()));
   }
 
   public Command getAutonomousCommand() {

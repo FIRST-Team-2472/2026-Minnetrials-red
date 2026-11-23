@@ -10,11 +10,11 @@ import java.util.function.Supplier;
 
 import edu.wpi.first.wpilibj2.command.Command;
 
-
 public class IntakeCommand extends Command {
-    private final IntakeSubsystem intakeSubsystem;
-    Supplier<Boolean> leftTrigger; // intake in
-    Supplier<Boolean> rightTrigger; // intake out
+  private final IntakeSubsystem intakeSubsystem;
+  Supplier<Boolean> leftTrigger; // intake in
+  Supplier<Boolean> rightTrigger; // intake out
+
   /**
    * Creates a new ExampleCommand.
    *
@@ -30,23 +30,25 @@ public class IntakeCommand extends Command {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
     if (leftTrigger.get()) {
-        intakeSubsystem.runIntakeIn();
+      intakeSubsystem.runIntakeIn();
     } else if (rightTrigger.get()) {
-        intakeSubsystem.runIntakeOut();
+      intakeSubsystem.runIntakeOut();
     } else {
-        intakeSubsystem.stopIntake();
+      intakeSubsystem.stopIntake();
     }
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+  }
 
   // Returns true when the command should end.
   @Override
