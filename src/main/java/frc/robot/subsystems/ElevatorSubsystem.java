@@ -25,6 +25,6 @@ public class ElevatorSubsystem extends SubsystemBase {
     }
 
     public double getInchesTraveled() {
-        return elevatorMotor.getEncoder().getPosition() * ElevatorConstants.kWinchDiameter * Math.PI;
+        return elevatorMotor.getEncoder().getPosition() * ElevatorConstants.kWinchDiameter * Math.PI / ElevatorConstants.kGearReduction * 2;
     }
 }
