@@ -4,23 +4,22 @@
 
 package frc.robot;
 
-/**
- * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
- * constants. This class should not be used for any other purpose. All constants should be declared
- * globally (i.e. public static). Do not put anything functional in this class.
- *
- * <p>It is advised to statically import this class (or one of its inner classes) wherever the
- * constants are needed, to reduce verbosity.
- */
-public final class Constants {
-  public static class OperatorConstants {
-    public static final int kDriverControllerPort = 2;
+import edu.wpi.first.math.util.Units;
 
+public final class Constants {
+  public static class ControllerConstants {
+    public static final int kDriverControllerPort = 0;
+    public static final int kLeftJoystickPort = 1;
+    public static final int kRightJoystickPort = 2;
+    public static final double kDeadband = 0.05;
   }
-  public static class IntakeConstants {
-    public static final int kIntakeID = 0;
-    public static final int kIntakeInSpeed = 10;
-    public static final int kIntakeOutSpeed = -10;
-    public static final int kIntakeOffSpeed = 0;
+
+  public static class DrivetrainConstants {
+    public static final int kLeftDriveMotorID = 0;
+    public static final int kRightDriveMotorID = 1;
+    public static final double kWheelDiameter = Units.inchesToMeters(6);
+    public static final double kTrackWidth = Units.inchesToMeters(22.5);
+    public static final int kGearReduction = 12;
+    public static final double kMaxSpeed = 3.2;
   }
 }
