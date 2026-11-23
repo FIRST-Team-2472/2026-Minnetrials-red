@@ -4,38 +4,34 @@
 
 package frc.robot;
 
-import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.IntakeCommand;
 import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.Constants.ControllerConstants;
+import frc.robot.commands.TankDriveCommand;
+import frc.robot.subsystems.TankDriveSubsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 
 public class RobotContainer {
-  // The robot's subsystems and commands are defined here...
-  private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();  
-
-  // Replace with CommandPS4Controller or CommandJoystick if needed
-  private final CommandXboxController controller =
-      new CommandXboxController(OperatorConstants.kDriverControllerPort);
+  private final CommandXboxController xboxController = new CommandXboxController(ControllerConstants.kDriverControllerPort);
+  private final CommandJoystick leftJoystick = new CommandJoystick(ControllerConstants.kLeftJoystickPort);
+  private final CommandJoystick rightJoystick = new CommandJoystick(ControllerConstants.kRightJoystickPort);
+  private final TankDriveSubsystem tankDriveSubsystem = new TankDriveSubsystem();
+  private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
+  SendableChooser<Command> autoChooser;
 
   public RobotContainer() {
     configureBindings();
   }
 
   private void configureBindings() {
-    intakeSubsystem.setDefaultCommand(new IntakeCommand(intakeSubsystem, () -> controller.leftTrigger().getAsBoolean() , () -> controller.rightTrigger().getAsBoolean()));
+    intakeSubsystem.setDefaultCommand(new IntakeCommand(intakeSubsystem, () -> xboxController.leftTrigger().getAsBoolean() , () -> xboxController.rightTrigger().getAsBoolean()));
+    tankDriveSubsystem.setDefaultCommand(new TankDriveCommand(tankDriveSubsystem, () -> leftJoystick.getY(), () -> rightJoystick.getX()));
   }
 
   public Command getAutonomousCommand() {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'getAutonomousCommand'");
+    return autoChooser.getSelected();
   }
-
-  /**
-   * Use this to pass the autonomous command to the main {@link Robot} class.
-   *
-   * @return the command to run in autonomous
-   */
-  
 }
